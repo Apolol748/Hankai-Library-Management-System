@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Hankai Library!-汉开图书馆</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        h3 {
+            color: #34495e;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        p {
+            line-height: 1.6;
+        }
+        .carousel {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            overflow: hidden;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+        }
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-item {
+            min-width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+            padding: 20px;
+        }
+        .carousel-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .carousel-control {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 20px;
+        }
+        .carousel-control.prev {
+            left: 10px;
+        }
+        .carousel-control.next {
+            right: 10px;
+        }
+        .links {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .links a {
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <img src="{% static 'logo.jpg' %}" alt="Hankai Logo" width="70" height="70" style="display: block; margin: auto;">
+    <h1>Welcome to Hankai Library!-汉开图书馆</h1>
+    <h3 style="text-align: center;">--System built by Apollo--</h3>
+    <div class="links">
+        <a href="{% url 'introduction' %}">Refresh-刷新</a><br>
+        <a href="{% url 'home' %}">Borrow& Return Books-借书还书</a>
+    </div>
+    <h3 style="text-align: center;">Introduction to our school-学校介绍:</h3>
+    <p style="text-align: center;">
+        Nanjing Hankai Academy offers a world-class education with Cambridge IGCSE, AS & A Level, and IFD Foundation programs. Our bilingual curriculum fosters academic excellence, critical thinking, and personal growth. Focusing on preparing students for top universities worldwide, we provide a supportive environment where students discover their passions and build a strong foundation for global success. Explore our commitment to nurturing responsible, adaptable, and ambitious learners.
+    </p>
+    <p style="text-align: center;">南京汉开书院是一所受政府邀请开办的高端民办学校是浦口区政府2016年1号文确定的重点民生及社会事业工程项目.</p>
+    <h3 style="text-align: center;">Books published by Principle Wang-王院长出版书籍</h3>
+
+    <!-- Carousel Section -->
+    <div class="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item">
+                <h4>期待探索一种科学的育人理念</h4>
+                <img src="{% static 'wzb1.jpg' %}" alt="院长图书" width="250" height="250"><br>
+                <a href="{% url 'wzb1' %}">
+                    <button>Borrow Here</button>
+                </a>
+            </div>
+            <div class="carousel-item">
+                <h4>期待创造一种独特的校园氛围</h4>
+                <img src="{% static 'wzb2.jpg' %}" alt="院长图书" width="250" height="250"><br>
+                <a href="{% url 'wzb2' %}">
+                    <button>Borrow Here</button>
+                </a>
+            </div>
+            <div class="carousel-item">
+                <h4>期待创办一所理想的民办学校</h4>
+                <img src="{% static 'wzb3.jpg' %}" alt="院长图书" width="250" height="250"><br>
+                <a href="{% url 'wzb3' %}">
+                    <button>Borrow Here</button>
+                </a>
+            </div>
+        </div>
+        <button class="carousel-control prev" onclick="prevSlide()">&#10094;</button>
+        <button class="carousel-control next" onclick="nextSlide()">&#10095;</button>
+    </div>
+
+    <div class="links">
+        <a href="https://hankaiacademy.org/" target="_blank">Check out our bilingual website!</a><br>
+        <a href="https://www.hankaiacademy.com/" target="_blank">国内部官网</a><br>
+        <a href="https://www.csphere-edu.com" target="_blank">Csphere Official Website</a>
+    </div>
+
+    <script>
+        let currentIndex = 0;
+        const slides = document.querySelectorAll('.carousel-item');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            const carouselInner = document.querySelector('.carousel-inner');
+            const offset = -index * 100;
+            carouselInner.style.transform = `translateX(${offset}%)`;
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            showSlide(currentIndex);
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            showSlide(currentIndex);
+        }
+
+        // Optional: Auto-play the carousel
+        setInterval(nextSlide, 5000); // Change slide every 5 seconds
+    </script>
+</body>
+</html>
